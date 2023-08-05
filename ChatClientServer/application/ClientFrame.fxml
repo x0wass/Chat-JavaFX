@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <left>
+      <ListView fx:id="usersListView" BorderPane.alignment="CENTER">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Kick Selected" onAction="#onKickSelectedUsers">
+                  <graphic>
+                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../icons/remove_user-16.png" />
+                         </image>
+                      </ImageView>
+                  </graphic></MenuItem>
+                  <CheckMenuItem fx:id="contextFilterMessagesMenuItem" mnemonicParsing="false" text="Filter Selected" onAction="#onFilterMessagesAction">
+                  <graphic>
+                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../icons/filled_filter-16.png" />
+                         </image>
+                      </ImageView>
+                  </graphic></CheckMenuItem>
+              </items>
+            </ContextMenu>
+         </contextMenu></ListView>
+   </left>
+   <center>
+      <ListView fx:id="messagesListView" prefHeight="422.0" prefWidth="667.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <VBox maxHeight="78.0" maxWidth="900.0" minHeight="78.0" minWidth="900.0" prefHeight="78.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="menuBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="900.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Connection">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#onQuitAction" text="Quit">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/disconnected-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Messages">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#onClearMessagesAction" text="Clear Messages">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/erase2-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onCatchupMessagesAction" text="Catchup Messages">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/repeat-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <CheckMenuItem fx:id="filterMessagesMenuItem" mnemonicParsing="false" onAction="#onFilterMessagesAction" text="Filter Messages">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/filled_filter-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </CheckMenuItem>
+                        <Menu mnemonicParsing="false" text="Sort">
+                           <items>
+                              <CheckMenuItem mnemonicParsing="false" onAction="#onActionSortMessagesByDate" text="by Date">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/clock-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem mnemonicParsing="false" onAction="#onActionSortMessagesByAuthor" text="by Author">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/gender_neutral_user-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem mnemonicParsing="false" onAction="#onActionSortMessagesByContent" text="by Content">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/select_all-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                           </items>
+                        </Menu>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Users">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#onKickSelectedUsers" text="Kick Selected">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/remove_user-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Preferences">
+                     <items>
+                        <Menu mnemonicParsing="false" text="Button">
+                           <items>
+                              <RadioMenuItem fx:id="graphicsOnlyMenuItem" mnemonicParsing="false" onAction="#onDisplayButtonsWithGraphicsOnly" selected="true" text="Graphics Only">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toggleGroup1" />
+                                 </toggleGroup>
+                              </RadioMenuItem>
+                              <RadioMenuItem mnemonicParsing="false" onAction="#onDisplayButtonsWithTextAndGraphics" text="Text + Graphics" toggleGroup="$toggleGroup1" />
+                              <RadioMenuItem mnemonicParsing="false" onAction="#onDisplayButtonsWithTextOnly" text="Text Only" toggleGroup="$toggleGroup1" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Messages">
+                          <items>
+                              <CheckMenuItem fx:id="showDateOnMessagesMenuItem" mnemonicParsing="false" onAction="#onShowDateOnMessages" text="Show Date" />
+                          </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="900.0">
+              <items>
+                <Button fx:id="quitButton" contentDisplay="GRAPHIC_ONLY" maxHeight="36.0" maxWidth="79.0" minHeight="36.0" minWidth="36.0" mnemonicParsing="false" onAction="#onQuitAction" text="Quit">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/disconnected-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL" prefHeight="4.0" prefWidth="0.0" />
+                  <Button fx:id="clearSelectionButton" contentDisplay="GRAPHIC_ONLY" maxHeight="36.0" maxWidth="110.0" minHeight="36.0" minWidth="36.0" mnemonicParsing="false" onAction="#onClearSelectedUsers" text="Clear User">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/delete_database-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="kickUsersButton" contentDisplay="GRAPHIC_ONLY" maxHeight="36.0" maxWidth="106.0" minHeight="36.0" minWidth="36.0" mnemonicParsing="false" onAction="#onKickSelectedUsers" text="Kick User">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/remove_user-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="4.0" />
+                  <Button fx:id="clearMessagesButton" contentDisplay="GRAPHIC_ONLY" maxHeight="36.0" maxWidth="134.0" minHeight="36.0" minWidth="36.0" mnemonicParsing="false" onAction="#onClearMessagesAction" text="Clear Messages">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/erase2-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="catchupMessagesButton" contentDisplay="GRAPHIC_ONLY" maxHeight="36.0" maxWidth="151.0" minHeight="36.0" minWidth="36.0" mnemonicParsing="false" onAction="#onCatchupMessagesAction" text="Catchup Messages">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/repeat-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ToggleButton fx:id="filterMessagesButton" contentDisplay="GRAPHIC_ONLY" maxHeight="36.0" maxWidth="134.0" minHeight="36.0" minWidth="36.0" mnemonicParsing="false" onAction="#onFilterMessagesAction" text="Filter Messages">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/filled_filter-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <Label fx:id="serverLabel" text="Label" />
+              </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <HBox maxHeight="50.0" maxWidth="900.0" minHeight="50.0" minWidth="900.0" prefHeight="50.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="messageText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="819.0" />
+            <Button fx:id="sendButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendAction" prefHeight="49.0" prefWidth="80.0" text="Send">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/sent-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
